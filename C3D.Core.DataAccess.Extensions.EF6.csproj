@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="flexViews.BuildTasks.SignTool" Version="1.4.109-ci-gfb2035d295">
+    <PackageReference Include="flexViews.BuildTasks.SignTool" Version="1.4.110-ci-gd0777f5d4e">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
