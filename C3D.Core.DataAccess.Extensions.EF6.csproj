@@ -1,15 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
-    <AssemblyTitle>$(AssemblyTitle) EF6</AssemblyTitle>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="flexViews.BuildTasks.SignTool" Version="1.4.110-ci-gd0777f5d4e">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
+		<AssemblyTitle>$(AssemblyTitle) EF6</AssemblyTitle>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
 </Project>
