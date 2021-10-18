@@ -2,9 +2,14 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="EntityFramework" Version="6.4.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>

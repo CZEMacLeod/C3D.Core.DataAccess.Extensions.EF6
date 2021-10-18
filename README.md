@@ -6,7 +6,7 @@
 
 This project contains the code for some EF6 extensions which make it easier to scan assemblies for entity model types, and for `ComplexTypeConfiguration<>` and `EntityTypeConfiguration<>` types.
 
-## Quick Summary
+## Quick Start
 
 - Install the Nuget package or copy this code into your project.
 - Ensure your DBContext class has `using System.Data.Entity.ModelConfiguration;`
