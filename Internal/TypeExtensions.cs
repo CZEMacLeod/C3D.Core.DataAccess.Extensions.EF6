@@ -30,5 +30,11 @@ namespace C3D.Core.DataAccess.Extensions
 			type.Name.Contains("AnonymousType") &&
 			(type.Name.StartsWith("<>") || type.Name.StartsWith("VB$")) &&
 			type.Attributes.HasFlag(TypeAttributes.NotPublic);
+
+		internal static bool InNamespace(this Type type, string nameSpace) =>
+			string.IsNullOrEmpty(nameSpace) ?
+				throw new ArgumentException($"'{nameof(nameSpace)}' cannot be null or empty.", nameof(nameSpace)) :
+				(type.Namespace + ".").StartsWith(nameSpace + ".");
+
 	}
 }
