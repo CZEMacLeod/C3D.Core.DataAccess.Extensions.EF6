@@ -65,3 +65,7 @@ protected override void OnModelCreating(DbModelBuilder modelBuilder)
     typeInfos.Add();
 }
 ```
+
+## TODO
+
+Better documentation, code documentation and add tests
