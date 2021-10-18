@@ -7,31 +7,16 @@ using System.Linq;
 
 namespace C3D.Core.DataAccess.Extensions
 {
-	internal class EntityTypeConfigurationInfo : TypeConfigurationInfo
-	{
-		public Type EntityType { get; }
+    internal class EntityTypeConfigurationInfo : TypeConfigurationInfo
+    {
+        protected override Type BaseGenericType => TypeConfigurationExtensions.GenericETCType;
+        
+        public EntityTypeConfigurationInfo(DbModelBuilder modelBuilder, Type type) : this(modelBuilder.Configurations, type) { }
+        public EntityTypeConfigurationInfo(ConfigurationRegistrar registrar, Type type) : base(registrar, type) { }
 
-		public EntityTypeConfigurationInfo(DbModelBuilder modelBuilder, Type entityType) :
-			this(modelBuilder.Configurations, entityType)
-		{ }
-
-		public EntityTypeConfigurationInfo(ConfigurationRegistrar registrar, Type entityType) : base(registrar)
-		{
-			EntityType = entityType;
-			ModelType = entityType.GetBaseGenericType(TypeConfigurationExtensions.GenericETCType);
-		}
-
-		public override Type ModelType { get; }
-
-		private static readonly MethodInfo addMethod = typeof(ConfigurationRegistrar).GetMethods().
-			Single(m=>m.Name == nameof(ConfigurationRegistrar.Add) && 
-				   m.GetGenericArguments().Any(a=>a.Name== "TEntityType"));
-		internal override MethodInfo AddMethod() => addMethod.MakeGenericMethod(ModelType);
-
-		//public override void Add() => modelBuilder.RegisterEntityType(modelType); 
-		public override void Add() => AddMethod().Invoke(registrar, Type.EmptyTypes);
-
-		public override bool InNamespace(string nameSpace) =>
-			base.InNamespace(nameSpace) || EntityType.Namespace.StartsWith(nameSpace);
-	}
+        private static readonly MethodInfo addMethod = typeof(ConfigurationRegistrar).GetMethods().
+            Single(m => m.Name == nameof(ConfigurationRegistrar.Add) &&
+                   m.GetGenericArguments().Any(a => a.Name == "TEntityType"));
+        internal override MethodInfo AddMethod() => addMethod.MakeGenericMethod(ModelType);
+    }
 }

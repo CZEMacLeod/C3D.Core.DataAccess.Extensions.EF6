@@ -7,32 +7,17 @@ using System.Linq;
 
 namespace C3D.Core.DataAccess.Extensions
 {
-	internal class ComplexTypeConfigurationInfo : TypeConfigurationInfo
-	{
-		public Type EntityType { get; }
+    internal class ComplexTypeConfigurationInfo : TypeConfigurationInfo
+    {
+        protected override Type BaseGenericType => TypeConfigurationExtensions.GenericCTCType;
 
-		public ComplexTypeConfigurationInfo(DbModelBuilder modelBuilder, Type entityType) :
-			this(modelBuilder.Configurations, entityType)
-		{ }
+        public ComplexTypeConfigurationInfo(DbModelBuilder modelBuilder, Type type) : this(modelBuilder.Configurations, type) { }
+        public ComplexTypeConfigurationInfo(ConfigurationRegistrar registrar, Type type) : base(registrar, type) { }
 
-		public ComplexTypeConfigurationInfo(ConfigurationRegistrar registrar, Type entityType) : base(registrar)
+        private static readonly MethodInfo addMethod = typeof(ConfigurationRegistrar).GetMethods().
+            Single(m => m.Name == nameof(ConfigurationRegistrar.Add) &&
+                   m.GetGenericArguments().Any(a => a.Name == "TComplexType"));
 
-		{
-			EntityType = entityType;
-			ModelType = entityType.GetBaseGenericType(TypeConfigurationExtensions.GenericCTCType);
-		}
-
-		public override Type ModelType { get; }
-
-		private static readonly MethodInfo addMethod = typeof(ConfigurationRegistrar).GetMethods().
-			Single(m => m.Name == nameof(ConfigurationRegistrar.Add) &&
-				   m.GetGenericArguments().Any(a => a.Name == "TComplexType"));
-		internal override MethodInfo AddMethod() => addMethod.MakeGenericMethod(ModelType);
-
-		//public override void Add() => modelBuilder.RegisterEntityType(modelType); 
-		public override void Add() => AddMethod().Invoke(registrar, Type.EmptyTypes);
-
-		public override bool InNamespace(string nameSpace) =>
-			base.InNamespace(nameSpace) || EntityType.Namespace.StartsWith(nameSpace);
-	}
+        internal override MethodInfo AddMethod() => addMethod.MakeGenericMethod(ModelType);
+    }
 }

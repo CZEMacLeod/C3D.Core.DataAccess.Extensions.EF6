@@ -1,7 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
-		<AssemblyTitle>$(AssemblyTitle) EF6</AssemblyTitle>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="EntityFramework" Version="6.4.0" />
+	</ItemGroup>
 </Project>

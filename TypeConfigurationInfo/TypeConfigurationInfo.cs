@@ -1,17 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration.Configuration;
-using System.Text;
 
 namespace C3D.Core.DataAccess.Extensions
 {
-	internal abstract class TypeConfigurationInfo : TypeInfo
-	{
-		protected ConfigurationRegistrar registrar;
+    internal abstract class TypeConfigurationInfo : TypeInfo
+    {
+        public static implicit operator Type(TypeConfigurationInfo typeInfo) => typeInfo.TypeConfigurationType;
 
-		protected TypeConfigurationInfo(ConfigurationRegistrar registrar)
-		{
-			this.registrar = registrar;
-		}
-	}
+        public Type TypeConfigurationType { get; }
+        public Type GenericType { get; }
+        public override Type ModelType { get; }
+
+        private ConfigurationRegistrar registrar;
+
+        protected abstract Type BaseGenericType { get; }
+
+        protected TypeConfigurationInfo(ConfigurationRegistrar registrar, Type type)
+        {
+            this.registrar = registrar;
+            TypeConfigurationType = type;
+            GenericType = type.GetBaseGenericType(BaseGenericType);
+            ModelType = GenericType.GetGenericArguments()[0];
+        }
+
+        private object CreateEntity() => Activator.CreateInstance(TypeConfigurationType);
+
+        public override void Add() => AddMethod().Invoke(registrar, new[] { CreateEntity() });
+
+        public override bool InNamespace(string nameSpace) =>
+            base.InNamespace(nameSpace) || TypeConfigurationType.InNamespace(nameSpace);
+    }
 }
