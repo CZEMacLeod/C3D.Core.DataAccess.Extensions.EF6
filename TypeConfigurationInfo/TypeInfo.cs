@@ -13,5 +13,7 @@ namespace C3D.Core.DataAccess.Extensions
 		internal abstract MethodInfo AddMethod();
 
 		public virtual bool InNamespace(string nameSpace) => ModelType.InNamespace(nameSpace);
-	}
+
+        public override string ToString() => ModelType.AssemblyQualifiedName;
+    }
 }

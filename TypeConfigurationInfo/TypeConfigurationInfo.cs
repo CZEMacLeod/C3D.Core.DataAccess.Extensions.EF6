@@ -29,5 +29,7 @@ namespace C3D.Core.DataAccess.Extensions
 
         public override bool InNamespace(string nameSpace) =>
             base.InNamespace(nameSpace) || TypeConfigurationType.InNamespace(nameSpace);
+
+        public override string ToString() => TypeConfigurationType.AssemblyQualifiedName;
     }
 }
