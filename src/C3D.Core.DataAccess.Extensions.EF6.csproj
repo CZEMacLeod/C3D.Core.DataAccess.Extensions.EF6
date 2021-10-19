@@ -9,6 +9,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<RepositoryUrl>https://github.com/CZEMacLeod/C3D.Core.DataAccess.Extensions.EF6.git</RepositoryUrl>
+		<GitRepositoryRemoteName>github</GitRepositoryRemoteName>
 	</PropertyGroup>
 
 	<ItemGroup>
