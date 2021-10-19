@@ -8,7 +8,9 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<ProjectUrl>https://github.com/CZEMacLeod/C3D.Core.DataAccess.Extensions.EF6</ProjectUrl>
 		<RepositoryUrl>https://github.com/CZEMacLeod/C3D.Core.DataAccess.Extensions.EF6.git</RepositoryUrl>
+		<RepositoryBranch>main</RepositoryBranch>
 		<GitRepositoryRemoteName>github</GitRepositoryRemoteName>
 	</PropertyGroup>
 
